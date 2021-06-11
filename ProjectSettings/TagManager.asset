@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enclos
   - Delete
+  - WAF
   layers:
   - Default
   - TransparentFX

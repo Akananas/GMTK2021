@@ -10,11 +10,14 @@ public class Dog : MonoBehaviour
     public float speedDog;
     public Rigidbody2D rb;
 
+    public Vector2 targetDirection;
+
     // Start is called before the first frame update
     void Awake()
     {
         controls = new DogControls();
-        controls.GamePlay.Bark.performed += ctx => Debug.Log("WAF!!");
+        controls.GamePlay.Bark.performed += ctx => gameObject.GetComponentInChildren<CircleCollider2D>().enabled = true;
+        controls.GamePlay.Bark.canceled += ctx => gameObject.GetComponentInChildren<CircleCollider2D>().enabled = false;
     }
 
     // Update is called once per frame
@@ -22,7 +25,7 @@ public class Dog : MonoBehaviour
     {   
         Vector2 mouseScreenPosition = controls.GamePlay.MousePosition.ReadValue<Vector2>();
         Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
-        Vector3 targetDirection = mouseWorldPosition - rb.position;
+        targetDirection = mouseWorldPosition - rb.position;
         float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90;
         transform.rotation = Quaternion .Euler(new Vector3(0f,0f,angle));
 
