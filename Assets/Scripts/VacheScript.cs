@@ -29,6 +29,7 @@ public class VacheScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Enclos" && !available){
             available = true;
+            direction = (endPos - basePos).normalized;
         }
     }
     private void OnTriggerExit2D(Collider2D other) {
