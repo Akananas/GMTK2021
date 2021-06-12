@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d77b8f4344d00574aaa3ea6f8e34d504, type: 3}
   m_Name: LevelRes3
   m_EditorClassIdentifier: 
-  DogSpawn: {x: 0, y: 0, z: 0}
-  VacheSpawn: {x: 0, y: 0, z: 0}
-  level: {fileID: 0}
+  DogSpawn: {x: -6.33, y: 3.14, z: 0}
+  VacheSpawn: {x: 6.51, y: -3.45, z: 0}
+  level: {fileID: 7819588662458490193, guid: 85fffc1cff0a567409f97f9562101be3, type: 3}
