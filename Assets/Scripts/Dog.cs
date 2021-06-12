@@ -11,12 +11,19 @@ public class Dog : MonoBehaviour
     public Rigidbody2D rb;
 
     public Vector2 targetDirection;
+    public ParticleSystem particleSystem;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         controls = new DogControls();
         controls.GamePlay.Bark.performed += ctx => gameObject.GetComponentInChildren<CircleCollider2D>().enabled = true;
+        controls.GamePlay.Bark.performed += ctx => particleSystem.transform.position = transform.position;
+        controls.GamePlay.Bark.performed += ctx => particleSystem.transform.rotation = transform.rotation;
+        controls.GamePlay.Bark.performed += ctx => particleSystem.Play();
+        controls.GamePlay.Bark.performed += ctx => audioSource.Play();
         controls.GamePlay.Bark.canceled += ctx => gameObject.GetComponentInChildren<CircleCollider2D>().enabled = false;
     }
 
