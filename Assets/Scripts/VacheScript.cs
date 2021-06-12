@@ -32,10 +32,10 @@ public class VacheScript : MonoBehaviour
             available = true;
             direction = (endPos - basePos).normalized;
         }
-        if(other.tag == "WAF"){
+        else if(other.tag == "WAF" && !available){
             Vector2 directionWaf = other.GetComponentInParent<Dog>().targetDirection.normalized;
             direction = directionWaf;
-            available = false;
+            //available = false;
         }
     }
     private void OnTriggerExit2D(Collider2D other) {
