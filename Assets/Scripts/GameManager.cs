@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<LevelObject> levels;
     private GameObject currentLoadedLevel;
+    public Animator animation;
     void Awake(){
         if (inst == null){
 
@@ -37,7 +38,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("Win");
         //StopGame(); Remettre plus tard
         vache.direction = Vector3.zero;
-        LoadNextLevel();
+        StartCoroutine("Fade");
+
     }
 
     private void StopGame(){
@@ -52,5 +54,12 @@ public class GameManager : MonoBehaviour
             dog.transform.position = levels[currentLevel].DogSpawn;
             vache.transform.position = levels[currentLevel].VacheSpawn;
         }
+    }
+    private IEnumerator Fade()
+    {
+        animation.SetBool("fade", true);
+        yield return new WaitForSecondsRealtime(1);
+        animation.SetBool("fade",false);
+        LoadNextLevel();
     }
 }
