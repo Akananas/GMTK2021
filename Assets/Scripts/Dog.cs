@@ -13,10 +13,12 @@ public class Dog : MonoBehaviour
     public Vector2 targetDirection;
     public ParticleSystem particleSystem;
     private AudioSource audioSource;
-
+    private bool start;
+    public Animator animation;
     // Start is called before the first frame update
     void Awake()
     {
+        start = false;
         audioSource = GetComponent<AudioSource>();
         controls = new DogControls();
         controls.GamePlay.Bark.performed += ctx => gameObject.GetComponentInChildren<CircleCollider2D>().enabled = true;
@@ -29,7 +31,7 @@ public class Dog : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {   if(start){
         if(GameManager.inst.isPlaying){
             Vector2 mouseScreenPosition = controls.GamePlay.MousePosition.ReadValue<Vector2>();
             Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
@@ -39,6 +41,10 @@ public class Dog : MonoBehaviour
 
             Vector3 movement = controls.GamePlay.Run.ReadValue<Vector2>() * speedDog;
             transform.position += movement * Time.deltaTime;
+        }
+        }else{
+            controls.GamePlay.Start.performed += ctx => animation.SetBool("title",true);
+            controls.GamePlay.Start.performed += ctx => start = true;
         }
     }
 

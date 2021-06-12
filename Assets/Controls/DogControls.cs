@@ -41,6 +41,14 @@ public class @DogControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Start"",
+                    ""type"": ""Button"",
+                    ""id"": ""0bea68f9-9d6f-48cb-bd97-2e911cf66a89"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -186,6 +194,17 @@ public class @DogControls : IInputActionCollection, IDisposable
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c2963244-0e88-43f1-a31a-3d98fbcba749"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -197,6 +216,7 @@ public class @DogControls : IInputActionCollection, IDisposable
         m_GamePlay_Run = m_GamePlay.FindAction("Run", throwIfNotFound: true);
         m_GamePlay_Bark = m_GamePlay.FindAction("Bark", throwIfNotFound: true);
         m_GamePlay_MousePosition = m_GamePlay.FindAction("MousePosition", throwIfNotFound: true);
+        m_GamePlay_Start = m_GamePlay.FindAction("Start", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -249,6 +269,7 @@ public class @DogControls : IInputActionCollection, IDisposable
     private readonly InputAction m_GamePlay_Run;
     private readonly InputAction m_GamePlay_Bark;
     private readonly InputAction m_GamePlay_MousePosition;
+    private readonly InputAction m_GamePlay_Start;
     public struct GamePlayActions
     {
         private @DogControls m_Wrapper;
@@ -256,6 +277,7 @@ public class @DogControls : IInputActionCollection, IDisposable
         public InputAction @Run => m_Wrapper.m_GamePlay_Run;
         public InputAction @Bark => m_Wrapper.m_GamePlay_Bark;
         public InputAction @MousePosition => m_Wrapper.m_GamePlay_MousePosition;
+        public InputAction @Start => m_Wrapper.m_GamePlay_Start;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -274,6 +296,9 @@ public class @DogControls : IInputActionCollection, IDisposable
                 @MousePosition.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMousePosition;
                 @MousePosition.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMousePosition;
                 @MousePosition.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMousePosition;
+                @Start.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnStart;
+                @Start.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnStart;
+                @Start.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnStart;
             }
             m_Wrapper.m_GamePlayActionsCallbackInterface = instance;
             if (instance != null)
@@ -287,6 +312,9 @@ public class @DogControls : IInputActionCollection, IDisposable
                 @MousePosition.started += instance.OnMousePosition;
                 @MousePosition.performed += instance.OnMousePosition;
                 @MousePosition.canceled += instance.OnMousePosition;
+                @Start.started += instance.OnStart;
+                @Start.performed += instance.OnStart;
+                @Start.canceled += instance.OnStart;
             }
         }
     }
@@ -296,5 +324,6 @@ public class @DogControls : IInputActionCollection, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnBark(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnStart(InputAction.CallbackContext context);
     }
 }
