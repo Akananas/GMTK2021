@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: LevelRes1
   m_EditorClassIdentifier: 
   DogSpawn: {x: -5.6751, y: -2.6249, z: 0}
-  VacheSpawn: {x: -0.73, y: 0.05, z: 0}
+  VacheSpawn:
+  - {x: 2.18, y: 0.09, z: 0}
+  nbrVaches: 1
   level: {fileID: 6048841318614723276, guid: 555528914489e51469957771cbca50e3, type: 3}

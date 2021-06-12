@@ -1723,7 +1723,7 @@ TextureImporter:
       name: Tileset_41
       rect:
         serializedVersion: 2
-        x: 128
+        x: 129
         y: 48
         width: 16
         height: 16
@@ -1744,7 +1744,7 @@ TextureImporter:
       name: Tileset_42
       rect:
         serializedVersion: 2
-        x: 144
+        x: 145
         y: 48
         width: 16
         height: 16
