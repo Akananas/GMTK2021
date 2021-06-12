@@ -204,7 +204,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1417249689 stripped
 MonoBehaviour:
@@ -327,6 +327,9 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: 002b7f556ae4ee043835d08052249631, type: 2}
   - {fileID: 11400000, guid: e5c783ee61687fb43ae52b770d205f3d, type: 2}
+  - {fileID: 11400000, guid: bb29adf172bcebd4f8f5606e67be2f20, type: 2}
+  - {fileID: 11400000, guid: 69020a0646a3c1941aab4f1e83cc4d64, type: 2}
+  - {fileID: 11400000, guid: 4a71ebf97e01eaa4b98334953e783fc9, type: 2}
   animation: {fileID: 1991304552}
 --- !u!4 &1481162040
 Transform:
@@ -340,7 +343,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1682419341
 GameObject:
@@ -471,7 +474,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &1819445312
 CircleCollider2D:
@@ -5370,7 +5373,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1991304547
 GameObject:
