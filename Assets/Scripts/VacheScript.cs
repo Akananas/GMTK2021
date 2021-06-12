@@ -22,7 +22,7 @@ public class VacheScript : MonoBehaviour
             isDone = true;
             GameManager.inst.CheckWinLevel();
         }
-        else if(other.tag == "WAF"){
+        else if(other.tag == "WAF" && !isDone){
             Vector2 directionWaf = other.GetComponentInParent<Dog>().targetDirection.normalized;
             direction = directionWaf;
             //available = false;
