@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public List<VacheScript> vaches;
+    public VacheScript vache;
+    public Dog dog;
     public float nextMove;
-    private float currentTimer;
+    private int currentLevel;
     public static GameManager inst;
-    bool isPlaying = true;
+    public bool isPlaying = true;
     void Awake(){
-
         if (inst == null){
 
             inst = this;
@@ -23,44 +23,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Update() {
-        if(isPlaying){
-            currentTimer += Time.deltaTime;
-            if(currentTimer >= nextMove && VacheAvailable()){
-                List<VacheScript> availableVaches = GetAvailable();
-                availableVaches[Random.Range(0,availableVaches.Count-1)].StartMoving();
-                currentTimer = 0;
-            }
-            else if(currentTimer >= nextMove){
-                currentTimer = 0;
-            }
-        }
+
+    public void VacheOutOfBound(){
+        StopGame();
     }
 
-    private bool VacheAvailable(){
-        foreach(VacheScript vache in vaches){
-            if(vache.available){
-                return true;
-            }
-        }
-        return false;
+    public void WinLevel(){
+        Debug.Log("Win");
+        StopGame();
     }
 
-    private List<VacheScript> GetAvailable(){
-        List<VacheScript> tmp = new List<VacheScript>();
-        foreach(VacheScript v in vaches){
-            if(v.available){
-                tmp.Add(v);
-            }
-        }
-        return tmp;
-    }
-
-    public void CheckLose(VacheScript vache){
-        vaches.Remove(vache);
-        if(vaches.Count <=2){
-            Debug.Log("Lose");
-            isPlaying = false;
-        }
+    private void StopGame(){
+        isPlaying = false;
+        dog.DisableInput();
     }
 }

@@ -30,14 +30,16 @@ public class Dog : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        Vector2 mouseScreenPosition = controls.GamePlay.MousePosition.ReadValue<Vector2>();
-        Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
-        targetDirection = mouseWorldPosition - rb.position;
-        float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90;
-        transform.rotation = Quaternion .Euler(new Vector3(0f,0f,angle));
+        if(GameManager.inst.isPlaying){
+            Vector2 mouseScreenPosition = controls.GamePlay.MousePosition.ReadValue<Vector2>();
+            Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+            targetDirection = mouseWorldPosition - rb.position;
+            float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90;
+            transform.rotation = Quaternion .Euler(new Vector3(0f,0f,angle));
 
-        Vector3 movement = controls.GamePlay.Run.ReadValue<Vector2>() * speedDog;
-        transform.position += movement * Time.deltaTime;
+            Vector3 movement = controls.GamePlay.Run.ReadValue<Vector2>() * speedDog;
+            transform.position += movement * Time.deltaTime;
+        }
     }
 
     void OnEnable()
@@ -47,6 +49,10 @@ public class Dog : MonoBehaviour
 
     void OnDisable()
     {
+        controls.GamePlay.Disable();
+    }
+
+    public void DisableInput(){
         controls.GamePlay.Disable();
     }
 }

@@ -4,35 +4,23 @@ using UnityEngine;
 
 public class VacheScript : MonoBehaviour
 {
-    private Vector2 basePos;
-    [SerializeField]
-    private Vector2 endPos;
     private Vector2 direction;
     private Vector2 currentDirection;
     public float speed;
-    public GameObject Dog;
-    public bool available {get;private set;} = true;
     private void Awake() {
-        basePos = this.transform.position;
-        direction = (endPos - basePos).normalized;
+        //Donner une vitesse de base?
     }
     private void Update() {
-        if(!available){
+        if(GameManager.inst.isPlaying){
             transform.Translate(direction * speed * Time.deltaTime);
         }
     }
 
-    public void StartMoving(){
-        currentDirection = direction;
-        available = false;
-    }
-
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "Enclos" && !available){
-            available = true;
-            direction = (endPos - basePos).normalized;
+        if(other.tag == "Enclos"){
+            GameManager.inst.WinLevel();
         }
-        else if(other.tag == "WAF" && !available){
+        else if(other.tag == "WAF"){
             Vector2 directionWaf = other.GetComponentInParent<Dog>().targetDirection.normalized;
             direction = directionWaf;
             //available = false;
@@ -40,7 +28,7 @@ public class VacheScript : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D other) {
         if(other.tag == "Delete"){
-            GameManager.inst.CheckLose(this);
+            GameManager.inst.VacheOutOfBound();
             Destroy(this.gameObject);
         }
     }
