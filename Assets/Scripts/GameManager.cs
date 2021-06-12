@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public List<VacheScript> vaches;
@@ -16,6 +16,10 @@ public class GameManager : MonoBehaviour
     public GameObject vachePrefab;
 
     public Animator animation;
+
+    public Text NbVaches;
+    public Text Score; 
+    private float NbScore = 0;
     void Awake(){
         if (inst == null){
 
@@ -38,6 +42,8 @@ public class GameManager : MonoBehaviour
 
     public void CheckWinLevel(){
         bool won = true;
+        NbScore +=1; 
+        Score.text = NbScore.ToString();
         //StopGame(); Remettre plus tard
         foreach(VacheScript vache in vaches){
             if(!vache.isDone){
@@ -79,6 +85,9 @@ public class GameManager : MonoBehaviour
                 vaches[i].Reset(levels[currentLevel].VacheSpawn[i]);
             }
         }
+        NbVaches.text = "/"+vaches.Count;
+        NbScore = 0;
+        Score.text = NbScore.ToString();
     }
     private IEnumerator Fade()
     {

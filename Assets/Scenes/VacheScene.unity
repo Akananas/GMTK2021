@@ -578,6 +578,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ec62d3b386fa8ae49aebf82ceb68a49b, type: 2}
   vachePrefab: {fileID: 4896714030037061410, guid: 88e8e1e15fb8691478ac7c41ff9a61e7, type: 3}
   animation: {fileID: 1991304552}
+  NbVaches: {fileID: 1963185823}
+  Score: {fileID: 70255310}
 --- !u!4 &1481162040
 Transform:
   m_ObjectHideFlags: 0
