@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     private float NbScore = 0;
     [SerializeField]
     private Camera mainCam;
+
+    private GameObject Confetti;
     void Awake(){
         if (inst == null){
 
@@ -44,6 +46,8 @@ public class GameManager : MonoBehaviour
     public void CheckWinLevel(){
         bool won = true;
         NbScore +=1; 
+        Confetti = GameObject.FindGameObjectWithTag("Confetti");
+        Confetti.GetComponentInParent<ParticleSystem>().Play();
         NbVaches.text = NbScore.ToString() + "/" +vaches.Count;
         //StopGame(); Remettre plus tard
         foreach(VacheScript vache in vaches){
