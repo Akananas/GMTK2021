@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     private int currentLevel;
     public static GameManager inst;
     public bool isPlaying = true;
+    [SerializeField]
+    private List<LevelObject> levels;
+    private GameObject currentLoadedLevel;
     void Awake(){
         if (inst == null){
 
@@ -21,6 +24,8 @@ public class GameManager : MonoBehaviour
         } else {
             Destroy(this);
         }
+        currentLevel = -1;
+        LoadNextLevel();
     }
 
 
@@ -30,11 +35,22 @@ public class GameManager : MonoBehaviour
 
     public void WinLevel(){
         Debug.Log("Win");
-        StopGame();
+        //StopGame(); Remettre plus tard
+        vache.direction = Vector3.zero;
+        LoadNextLevel();
     }
 
     private void StopGame(){
         isPlaying = false;
         dog.DisableInput();
+    }
+    private void LoadNextLevel(){
+        currentLevel++;
+        if(currentLevel < levels.Count){
+            Destroy(currentLoadedLevel);
+            currentLoadedLevel = Instantiate(levels[currentLevel].level);
+            dog.transform.position = levels[currentLevel].DogSpawn;
+            vache.transform.position = levels[currentLevel].VacheSpawn;
+        }
     }
 }

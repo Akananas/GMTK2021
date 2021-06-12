@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VacheScript : MonoBehaviour
 {
-    private Vector2 direction;
+    public Vector2 direction;
     private Vector2 currentDirection;
     public float speed;
     private void Awake() {
