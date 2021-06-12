@@ -496,6 +496,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4a71ebf97e01eaa4b98334953e783fc9, type: 2}
   - {fileID: 11400000, guid: 5c7b86b8debf85041a543f3756014ceb, type: 2}
   - {fileID: 11400000, guid: ec62d3b386fa8ae49aebf82ceb68a49b, type: 2}
+  - {fileID: 11400000, guid: e2acaeffd57269e41979e8cfe002712f, type: 2}
+  - {fileID: 11400000, guid: 4001cfb557390184abb3416f23670030, type: 2}
+  - {fileID: 11400000, guid: d17eb893dfef6ab4e817422c943d9713, type: 2}
   vachePrefab: {fileID: 4896714030037061410, guid: 88e8e1e15fb8691478ac7c41ff9a61e7, type: 3}
   animation: {fileID: 1991304552}
   sign: {fileID: 451215083}

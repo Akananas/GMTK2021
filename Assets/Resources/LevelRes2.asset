@@ -17,3 +17,4 @@ MonoBehaviour:
   - {x: -5.37, y: -1.42, z: 0}
   nbrVaches: 1
   level: {fileID: 3266142760316671858, guid: 62f6d09547384194396371a449f371c8, type: 3}
+  signPos: {x: 6.95, y: -1.3, z: 0}
