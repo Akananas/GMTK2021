@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d77b8f4344d00574aaa3ea6f8e34d504, type: 3}
-  m_Name: LevelRes3
+  m_Name: LevelRes7
   m_EditorClassIdentifier: 
-  DogSpawn: {x: -6.33, y: 3.14, z: 0}
+  DogSpawn: {x: 0, y: 1.96, z: 0}
   VacheSpawn:
-  - {x: 7.01, y: -3.15, z: 0}
-  nbrVaches: 1
-  level: {fileID: 7819588662458490193, guid: 85fffc1cff0a567409f97f9562101be3, type: 3}
+  - {x: -7.11, y: -0.9, z: 0}
+  - {x: -1.43, y: -2.77, z: 0}
+  nbrVaches: 2
+  level: {fileID: 6595713637625524517, guid: 4338d911cea649942aa51d5a1b4562c9, type: 3}
