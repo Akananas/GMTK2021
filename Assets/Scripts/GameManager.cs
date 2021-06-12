@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public VacheScript vache;
+    public List<VacheScript> vaches;
     public Dog dog;
     public float nextMove;
     private int currentLevel;
@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<LevelObject> levels;
     private GameObject currentLoadedLevel;
+    public GameObject vachePrefab;
+
     public Animator animation;
     void Awake(){
         if (inst == null){
@@ -34,11 +36,20 @@ public class GameManager : MonoBehaviour
         StopGame();
     }
 
-    public void WinLevel(){
-        Debug.Log("Win");
+    public void CheckWinLevel(){
+        bool won = true;
         //StopGame(); Remettre plus tard
-        vache.direction = Vector3.zero;
-        StartCoroutine("Fade");
+        foreach(VacheScript vache in vaches){
+            if(!vache.isDone){
+                won = false;
+            }
+        }
+        if(won){
+            foreach(VacheScript vache in vaches){
+                vache.direction = Vector3.zero;
+            }
+            StartCoroutine("Fade");
+        }
 
     }
 
@@ -52,7 +63,13 @@ public class GameManager : MonoBehaviour
             Destroy(currentLoadedLevel);
             currentLoadedLevel = Instantiate(levels[currentLevel].level);
             dog.transform.position = levels[currentLevel].DogSpawn;
-            vache.transform.position = levels[currentLevel].VacheSpawn;
+            for(int i = vaches.Count; i < levels[currentLevel].nbrVaches; i++){
+                var go = Instantiate(vachePrefab,Vector3.zero, Quaternion.identity);
+                vaches.Add(go.GetComponent<VacheScript>());
+            }
+            for(int i = 0; i < vaches.Count; i++){
+                vaches[i].Reset(levels[currentLevel].VacheSpawn[i]);
+            }
         }
     }
     private IEnumerator Fade()

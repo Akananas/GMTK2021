@@ -7,6 +7,7 @@ public class VacheScript : MonoBehaviour
     public Vector2 direction;
     private Vector2 currentDirection;
     public float speed;
+    public bool isDone;
     private void Awake() {
         //Donner une vitesse de base?
     }
@@ -17,8 +18,9 @@ public class VacheScript : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "Enclos"){
-            GameManager.inst.WinLevel();
+        if(other.tag == "Enclos" && !isDone){
+            isDone = true;
+            GameManager.inst.CheckWinLevel();
         }
         else if(other.tag == "WAF"){
             Vector2 directionWaf = other.GetComponentInParent<Dog>().targetDirection.normalized;
@@ -31,5 +33,10 @@ public class VacheScript : MonoBehaviour
             GameManager.inst.VacheOutOfBound();
             Destroy(this.gameObject);
         }
+    }
+
+    public void Reset(Vector3 pos){
+        isDone = false;
+        transform.position = pos;
     }
 }

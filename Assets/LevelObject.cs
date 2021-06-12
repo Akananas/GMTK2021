@@ -6,6 +6,7 @@ using UnityEngine;
 public class LevelObject : ScriptableObject
 {
     public Vector3 DogSpawn;
-    public Vector3 VacheSpawn;
+    public List<Vector3> VacheSpawn;
+    public int nbrVaches;
     public GameObject level;
 }
