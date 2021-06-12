@@ -61,11 +61,19 @@ public class GameManager : MonoBehaviour
         currentLevel++;
         if(currentLevel < levels.Count){
             Destroy(currentLoadedLevel);
-            currentLoadedLevel = Instantiate(levels[currentLevel].level);
-            dog.transform.position = levels[currentLevel].DogSpawn;
-            for(int i = vaches.Count; i < levels[currentLevel].nbrVaches; i++){
-                var go = Instantiate(vachePrefab,Vector3.zero, Quaternion.identity);
-                vaches.Add(go.GetComponent<VacheScript>());
+            LevelObject newLevel = levels[currentLevel];
+            currentLoadedLevel = Instantiate(newLevel.level);
+            dog.transform.position = newLevel.DogSpawn;
+            if(vaches.Count > newLevel.nbrVaches){
+                for(int i = vaches.Count - 1; i >= newLevel.nbrVaches;i--){
+                    Destroy(vaches[i].gameObject);
+                    vaches.RemoveAt(i);
+                }
+            }else if (vaches.Count < newLevel.nbrVaches){
+                for(int i = vaches.Count; i < newLevel.nbrVaches; i++){
+                    var go = Instantiate(vachePrefab,Vector3.zero, Quaternion.identity);
+                    vaches.Add(go.GetComponent<VacheScript>());
+                }
             }
             for(int i = 0; i < vaches.Count; i++){
                 vaches[i].Reset(levels[currentLevel].VacheSpawn[i]);
