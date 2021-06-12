@@ -14,14 +14,16 @@ public class GameManager : MonoBehaviour
     private List<LevelObject> levels;
     private GameObject currentLoadedLevel;
     public GameObject vachePrefab;
-
     public Animator animation;
+    public Animator titleAnim;
+
     public RectTransform sign, signCanvas;
     public Text NbVaches;
     private float NbScore = 0;
     [SerializeField]
     private Camera mainCam;
-
+    [SerializeField]
+    private GameObject gameOverCanvas;
     void Awake(){
         if (inst == null){
 
@@ -33,10 +35,12 @@ public class GameManager : MonoBehaviour
         } else {
             Destroy(this);
         }
-        currentLevel = -1;
+        currentLevel = 0;
         LoadNextLevel();
+        StopGame();
     }
-
+    private void Update() {
+    }
 
     public void VacheOutOfBound(){
         StopGame();
@@ -49,17 +53,21 @@ public class GameManager : MonoBehaviour
         confetti.GetComponent<ParticleSystem>().Play();
         confetti.GetComponent<AudioSource>().Play();
         NbVaches.text = NbScore.ToString() + "/" +vaches.Count;
-        //StopGame(); Remettre plus tard
         foreach(VacheScript vache in vaches){
             if(!vache.isDone){
                 won = false;
             }
         }
         if(won){
+            currentLevel++;
             foreach(VacheScript vache in vaches){
                 vache.direction = Vector3.zero;
             }
-            StartCoroutine("Fade");
+            if(currentLevel < levels.Count){
+                StartCoroutine("Fade");
+            }else{
+                StartCoroutine(EndCoroutine());
+            }
         }
 
     }
@@ -68,32 +76,32 @@ public class GameManager : MonoBehaviour
         isPlaying = false;
         dog.DisableInput();
     }
+    public void RestartGame(){
+        isPlaying = true;
+        dog.EnableInput();
+    }
     private void LoadNextLevel(){
-        currentLevel++;
-        if(currentLevel < levels.Count){
-            Destroy(currentLoadedLevel);
-            LevelObject newLevel = levels[currentLevel];
-            currentLoadedLevel = Instantiate(newLevel.level);
-            dog.transform.position = newLevel.DogSpawn;
-            if(vaches.Count > newLevel.nbrVaches){
-                for(int i = vaches.Count - 1; i >= newLevel.nbrVaches;i--){
-                    Destroy(vaches[i].gameObject);
-                    vaches.RemoveAt(i);
-                }
-            }else if (vaches.Count < newLevel.nbrVaches){
-                for(int i = vaches.Count; i < newLevel.nbrVaches; i++){
-                    var go = Instantiate(vachePrefab,Vector3.zero, Quaternion.identity);
-                    vaches.Add(go.GetComponent<VacheScript>());
-                }
+        Destroy(currentLoadedLevel);
+        LevelObject newLevel = levels[currentLevel];
+        currentLoadedLevel = Instantiate(newLevel.level);
+        dog.transform.position = newLevel.DogSpawn;
+        if(vaches.Count > newLevel.nbrVaches){
+            for(int i = vaches.Count - 1; i >= newLevel.nbrVaches;i--){
+                Destroy(vaches[i].gameObject);
+                vaches.RemoveAt(i);
             }
-            for(int i = 0; i < vaches.Count; i++){
-                vaches[i].Reset(levels[currentLevel].VacheSpawn[i]);
+        }else if (vaches.Count < newLevel.nbrVaches){
+            for(int i = vaches.Count; i < newLevel.nbrVaches; i++){
+                var go = Instantiate(vachePrefab,Vector3.zero, Quaternion.identity);
+                vaches.Add(go.GetComponent<VacheScript>());
             }
-            PlaceSign(newLevel.signPos);
-            NbScore = 0;
-            NbVaches.text = NbScore.ToString() + "/" +vaches.Count;
         }
-
+        for(int i = 0; i < vaches.Count; i++){
+            vaches[i].Reset(levels[currentLevel].VacheSpawn[i]);
+        }
+        PlaceSign(newLevel.signPos);
+        NbScore = 0;
+        NbVaches.text = NbScore.ToString() + "/" +vaches.Count;
     }
 
     private void PlaceSign(Vector3 signPos){
@@ -108,10 +116,21 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator Fade()
     {
+        StopGame();
         yield return new WaitForSecondsRealtime(1.5f);
         animation.SetBool("fade", true);
         yield return new WaitForSecondsRealtime(1);
         animation.SetBool("fade",false);
         LoadNextLevel();
+        RestartGame();
+    }
+
+    private IEnumerator EndCoroutine()
+    {
+        StopGame();
+        yield return new WaitForSecondsRealtime(1.5f);
+        animation.SetBool("fade", true);
+        yield return new WaitForSecondsRealtime(1);
+        gameOverCanvas.SetActive(true);
     }
 }

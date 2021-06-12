@@ -27,11 +27,14 @@ public class Dog : MonoBehaviour
         controls.GamePlay.Bark.performed += ctx => particleSystem.Play();
         controls.GamePlay.Bark.performed += ctx => audioSource.Play();
         controls.GamePlay.Bark.canceled += ctx => gameObject.GetComponentInChildren<CircleCollider2D>().enabled = false;
+        controls.GamePlay.Start.performed += ctx => animation.SetBool("title",true);
+        controls.GamePlay.Start.performed += ctx => GameManager.inst.RestartGame();
+        controls.GamePlay.Start.performed += ctx => controls.GamePlay.Start.Disable();
     }
 
     // Update is called once per frame
     void Update()
-    {   if(start){
+    { 
         if(GameManager.inst.isPlaying){
             Vector2 mouseScreenPosition = controls.GamePlay.MousePosition.ReadValue<Vector2>();
             Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
@@ -41,10 +44,6 @@ public class Dog : MonoBehaviour
 
             Vector3 movement = controls.GamePlay.Run.ReadValue<Vector2>() * speedDog;
             transform.position += movement * Time.deltaTime;
-        }
-        }else{
-            controls.GamePlay.Start.performed += ctx => animation.SetBool("title",true);
-            controls.GamePlay.Start.performed += ctx => start = true;
         }
     }
 
@@ -59,6 +58,10 @@ public class Dog : MonoBehaviour
     }
 
     public void DisableInput(){
-        controls.GamePlay.Disable();
+        controls.GamePlay.Bark.Disable();
+    }
+
+    public void EnableInput(){
+        controls.GamePlay.Bark.Enable();
     }
 }
