@@ -9,4 +9,6 @@ public class LevelObject : ScriptableObject
     public List<Vector3> VacheSpawn;
     public int nbrVaches;
     public GameObject level;
+    public Vector3 signPos;
+
 }

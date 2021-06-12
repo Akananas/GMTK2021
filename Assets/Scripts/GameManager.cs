@@ -16,10 +16,11 @@ public class GameManager : MonoBehaviour
     public GameObject vachePrefab;
 
     public Animator animation;
-
+    public RectTransform sign, signCanvas;
     public Text NbVaches;
-    public Text Score; 
     private float NbScore = 0;
+    [SerializeField]
+    private Camera mainCam;
     void Awake(){
         if (inst == null){
 
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
     public void CheckWinLevel(){
         bool won = true;
         NbScore +=1; 
-        Score.text = NbScore.ToString();
+        NbVaches.text = NbScore.ToString() + "/" +vaches.Count;
         //StopGame(); Remettre plus tard
         foreach(VacheScript vache in vaches){
             if(!vache.isDone){
@@ -84,10 +85,23 @@ public class GameManager : MonoBehaviour
             for(int i = 0; i < vaches.Count; i++){
                 vaches[i].Reset(levels[currentLevel].VacheSpawn[i]);
             }
+            PlaceSign(newLevel.signPos);
+            NbScore = 0;
+            NbVaches.text = NbScore.ToString() + "/" +vaches.Count;
         }
-        NbVaches.text = "/"+vaches.Count;
-        NbScore = 0;
-        Score.text = NbScore.ToString();
+
+    }
+
+    private void PlaceSign(Vector3 signPos){
+ 
+  
+        Vector2 ViewportPosition=mainCam.WorldToViewportPoint(signPos);
+        Vector2 WorldObject_ScreenPosition=new Vector2(
+        ((ViewportPosition.x*signCanvas.sizeDelta.x)-(signCanvas.sizeDelta.x*0.5f)),
+        ((ViewportPosition.y*signCanvas.sizeDelta.y)-(signCanvas.sizeDelta.y*0.5f)));
+        
+        //now you can set the position of the ui element
+        sign.anchoredPosition=WorldObject_ScreenPosition;
     }
     private IEnumerator Fade()
     {

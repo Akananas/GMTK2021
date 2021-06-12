@@ -337,6 +337,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d17eb893dfef6ab4e817422c943d9713, type: 2}
   vachePrefab: {fileID: 4896714030037061410, guid: 88e8e1e15fb8691478ac7c41ff9a61e7, type: 3}
   animation: {fileID: 1991304552}
+  sign: {fileID: 0}
+  signCanvas: {fileID: 0}
+  NbVaches: {fileID: 0}
+  Score: {fileID: 0}
+  mainCam: {fileID: 0}
 --- !u!4 &1481162040
 Transform:
   m_ObjectHideFlags: 0
@@ -5320,7 +5325,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1991304548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5438,11 +5443,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9069714005380370468, guid: c4ba7f00ca21e6f4383334759c0c986a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.26
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 9069714005380370468, guid: c4ba7f00ca21e6f4383334759c0c986a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.25
+      value: -1.28
       objectReference: {fileID: 0}
     - target: {fileID: 9069714005380370468, guid: c4ba7f00ca21e6f4383334759c0c986a, type: 3}
       propertyPath: m_LocalPosition.z
