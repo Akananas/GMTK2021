@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Camera mainCam;
 
-    private GameObject Confetti;
     void Awake(){
         if (inst == null){
 
@@ -46,8 +45,9 @@ public class GameManager : MonoBehaviour
     public void CheckWinLevel(){
         bool won = true;
         NbScore +=1; 
-        Confetti = GameObject.FindGameObjectWithTag("Confetti");
-        Confetti.GetComponentInParent<ParticleSystem>().Play();
+        GameObject confetti = GameObject.FindGameObjectWithTag("Confetti");
+        confetti.GetComponent<ParticleSystem>().Play();
+        confetti.GetComponent<AudioSource>().Play();
         NbVaches.text = NbScore.ToString() + "/" +vaches.Count;
         //StopGame(); Remettre plus tard
         foreach(VacheScript vache in vaches){
@@ -103,12 +103,12 @@ public class GameManager : MonoBehaviour
         Vector2 WorldObject_ScreenPosition=new Vector2(
         ((ViewportPosition.x*signCanvas.sizeDelta.x)-(signCanvas.sizeDelta.x*0.5f)),
         ((ViewportPosition.y*signCanvas.sizeDelta.y)-(signCanvas.sizeDelta.y*0.5f)));
-        
-        //now you can set the position of the ui element
+
         sign.anchoredPosition=WorldObject_ScreenPosition;
     }
     private IEnumerator Fade()
     {
+        yield return new WaitForSecondsRealtime(1.5f);
         animation.SetBool("fade", true);
         yield return new WaitForSecondsRealtime(1);
         animation.SetBool("fade",false);
