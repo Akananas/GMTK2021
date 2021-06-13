@@ -9,7 +9,8 @@ public class Dog : MonoBehaviour
     Vector2 move;
     public float speedDog;
     public Rigidbody2D rb;
-
+    [SerializeField]
+    private CameraShake cameraShake;
     public Vector2 targetDirection;
     public ParticleSystem particleSystem;
     private AudioSource audioSource;
@@ -21,11 +22,7 @@ public class Dog : MonoBehaviour
         start = false;
         audioSource = GetComponent<AudioSource>();
         controls = new DogControls();
-        controls.GamePlay.Bark.performed += ctx => gameObject.GetComponentInChildren<CircleCollider2D>().enabled = true;
-        controls.GamePlay.Bark.performed += ctx => particleSystem.transform.position = transform.position;
-        controls.GamePlay.Bark.performed += ctx => particleSystem.transform.rotation = transform.rotation;
-        controls.GamePlay.Bark.performed += ctx => particleSystem.Play();
-        controls.GamePlay.Bark.performed += ctx => audioSource.Play();
+        controls.GamePlay.Bark.performed += ctx => Bark();
         controls.GamePlay.Bark.canceled += ctx => gameObject.GetComponentInChildren<CircleCollider2D>().enabled = false;
         controls.GamePlay.Start.performed += ctx => animation.SetBool("title",true);
         controls.GamePlay.Start.performed += ctx => GameManager.inst.RestartGame();
@@ -63,5 +60,14 @@ public class Dog : MonoBehaviour
 
     public void EnableInput(){
         controls.GamePlay.Bark.Enable();
+    }
+
+    private void Bark(){
+        cameraShake.StartShaking(0.35f);
+        gameObject.GetComponentInChildren<CircleCollider2D>().enabled = true;
+        particleSystem.transform.position = transform.position;
+        particleSystem.transform.rotation = transform.rotation;
+        particleSystem.Play();
+        audioSource.Play();
     }
 }

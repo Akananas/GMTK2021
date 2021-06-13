@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
     public Animator animation;
     public Animator titleAnim;
 
-    public RectTransform sign, signCanvas;
-    public Text NbVaches;
+    public GameObject sign;
+    public TextMesh NbVaches;
     private float NbScore = 0;
     [SerializeField]
     private Camera mainCam;
@@ -100,19 +100,13 @@ public class GameManager : MonoBehaviour
             vaches[i].Reset(levels[currentLevel].VacheSpawn[i]);
         }
         PlaceSign(newLevel.signPos);
-        NbScore = 0;
-        NbVaches.text = NbScore.ToString() + "/" +vaches.Count;
+
     }
 
     private void PlaceSign(Vector3 signPos){
- 
-  
-        Vector2 ViewportPosition=mainCam.WorldToViewportPoint(signPos);
-        Vector2 WorldObject_ScreenPosition=new Vector2(
-        ((ViewportPosition.x*signCanvas.sizeDelta.x)-(signCanvas.sizeDelta.x*0.5f)),
-        ((ViewportPosition.y*signCanvas.sizeDelta.y)-(signCanvas.sizeDelta.y*0.5f)));
-
-        sign.anchoredPosition=WorldObject_ScreenPosition;
+        sign.transform.position = signPos;
+        NbScore = 0;
+        NbVaches.text = NbScore.ToString() + "/" +vaches.Count;
     }
     private IEnumerator Fade()
     {
