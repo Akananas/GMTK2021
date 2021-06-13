@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     private Camera mainCam;
     [SerializeField]
     private GameObject gameOverCanvas;
+    [SerializeField]
+    private GameObject objectiveText;
     void Awake(){
         if (inst == null){
 
@@ -76,9 +78,13 @@ public class GameManager : MonoBehaviour
         isPlaying = false;
         dog.DisableInput();
     }
-    public void RestartGame(){
+    private void RestartGame(){
         isPlaying = true;
         dog.EnableInput();
+    }
+    public void StartGame(){
+        RestartGame();
+        objectiveText.SetActive(true);
     }
     private void LoadNextLevel(){
         Destroy(currentLoadedLevel);
@@ -122,6 +128,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator EndCoroutine()
     {
         StopGame();
+        objectiveText.SetActive(false);
         yield return new WaitForSecondsRealtime(1.5f);
         animation.SetBool("fade", true);
         yield return new WaitForSecondsRealtime(1);

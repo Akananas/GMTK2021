@@ -25,7 +25,7 @@ public class Dog : MonoBehaviour
         controls.GamePlay.Bark.performed += ctx => Bark();
         controls.GamePlay.Bark.canceled += ctx => gameObject.GetComponentInChildren<CircleCollider2D>().enabled = false;
         controls.GamePlay.Start.performed += ctx => animation.SetBool("title",true);
-        controls.GamePlay.Start.performed += ctx => GameManager.inst.RestartGame();
+        controls.GamePlay.Start.performed += ctx => GameManager.inst.StartGame();
         controls.GamePlay.Start.performed += ctx => controls.GamePlay.Start.Disable();
     }
 

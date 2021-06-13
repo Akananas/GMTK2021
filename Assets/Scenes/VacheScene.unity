@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &81137458
 RectTransform:
   m_ObjectHideFlags: 0
@@ -158,8 +158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 298.29077, y: 230.263}
+  m_AnchoredPosition: {x: -13, y: 3}
+  m_SizeDelta: {x: 112.6469, y: 53.3042}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &81137459
 MonoBehaviour:
@@ -284,7 +284,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e923089b7714a0745aac299dc0118659, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.239
+  m_Volume: 0.125
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -394,12 +394,12 @@ GameObject:
   - component: {fileID: 526672017}
   - component: {fileID: 526672016}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ObjectiveText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &526672015
 RectTransform:
   m_ObjectHideFlags: 0
@@ -414,10 +414,10 @@ RectTransform:
   m_Father: {fileID: 1991304551}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 3803.3474, y: 640.1168}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -87}
+  m_SizeDelta: {x: 3429.9353, y: 333.08875}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &526672016
 MonoBehaviour:
@@ -440,11 +440,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 300
+    m_Font: {fileID: 12800000, guid: 73fe26d129b19a740886feacef559c41, type: 3}
+    m_FontSize: 108
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 1
     m_MaxSize: 300
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -903,6 +903,7 @@ MonoBehaviour:
   NbVaches: {fileID: 1651457212}
   mainCam: {fileID: 654869330}
   gameOverCanvas: {fileID: 589287759}
+  objectiveText: {fileID: 526672014}
 --- !u!4 &1481162040
 Transform:
   m_ObjectHideFlags: 0
@@ -6282,7 +6283,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4347389011291908631, guid: c4ba7f00ca21e6f4383334759c0c986a, type: 3}
       propertyPath: m_Volume
-      value: 0.791
+      value: 0.422
       objectReference: {fileID: 0}
     - target: {fileID: 9069714005380370467, guid: c4ba7f00ca21e6f4383334759c0c986a, type: 3}
       propertyPath: Title
