@@ -38,5 +38,6 @@ public class VacheScript : MonoBehaviour
     public void Reset(Vector3 pos){
         isDone = false;
         transform.position = pos;
+        direction = Random.insideUnitCircle;
     }
 }
