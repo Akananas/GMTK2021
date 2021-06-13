@@ -76,11 +76,9 @@ public class GameManager : MonoBehaviour
 
     private void StopGame(){
         isPlaying = false;
-        dog.DisableInput();
     }
     private void RestartGame(){
         isPlaying = true;
-        dog.EnableInput();
     }
     public void StartGame(){
         RestartGame();

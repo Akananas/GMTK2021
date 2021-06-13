@@ -54,20 +54,15 @@ public class Dog : MonoBehaviour
         controls.GamePlay.Disable();
     }
 
-    public void DisableInput(){
-        controls.GamePlay.Bark.Disable();
-    }
-
-    public void EnableInput(){
-        controls.GamePlay.Bark.Enable();
-    }
 
     private void Bark(){
-        cameraShake.StartShaking(0.35f);
-        gameObject.GetComponentInChildren<CircleCollider2D>().enabled = true;
-        particleSystem.transform.position = transform.position;
-        particleSystem.transform.rotation = transform.rotation;
-        particleSystem.Play();
-        audioSource.Play();
+        if(GameManager.inst.isPlaying){
+            cameraShake.StartShaking(0.35f);
+            gameObject.GetComponentInChildren<CircleCollider2D>().enabled = true;
+            particleSystem.transform.position = transform.position;
+            particleSystem.transform.rotation = transform.rotation;
+            particleSystem.Play();
+            audioSource.Play();
+        }
     }
 }
