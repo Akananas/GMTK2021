@@ -325,7 +325,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &654869332
 MonoBehaviour:
@@ -5931,6 +5931,10 @@ PrefabInstance:
       propertyPath: Title
       value: 
       objectReference: {fileID: 1266272981}
+    - target: {fileID: 9069714005380370467, guid: c4ba7f00ca21e6f4383334759c0c986a, type: 3}
+      propertyPath: speedDog
+      value: 7.5
+      objectReference: {fileID: 0}
     - target: {fileID: 9069714005380370467, guid: c4ba7f00ca21e6f4383334759c0c986a, type: 3}
       propertyPath: animation
       value: 
