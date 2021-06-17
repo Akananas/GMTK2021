@@ -34,7 +34,16 @@ public class VacheScript : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
+    
+    private void OnCollisionEnter2D(Collision2D other) {
+        var normal = other.contacts[0].normal;
+        if(normal.x != 0){
+            direction.x = -direction.x;
+        }
+        if(normal.y != 0){
+            direction.y = -direction.y;
+        }
+    }
     public void Reset(Vector3 pos){
         isDone = false;
         transform.position = pos;
