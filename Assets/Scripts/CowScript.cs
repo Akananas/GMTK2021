@@ -19,6 +19,7 @@ public class CowScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Enclos" && !IsDone){
             IsDone = true;
+            Direction = Vector2.zero;
             GameManager.Instance.CheckWinLevel();
         }
         else if(other.tag == "WAF" && !IsDone){
@@ -37,10 +38,10 @@ public class CowScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         var normal = other.contacts[0].normal;
         if(normal.x != 0){
-            Direction.x = -Direction.x;
+            Direction.x = -Direction.x * 0.5f;
         }
         if(normal.y != 0){
-            Direction.y = -Direction.y;
+            Direction.y = -Direction.y * 0.5f;
         }
     }
     public void Reset(Vector3 pos){
