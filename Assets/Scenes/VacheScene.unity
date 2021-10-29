@@ -881,11 +881,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9edb383153209947a734950bc1ac018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vaches: []
-  dog: {fileID: 1417249689}
-  nextMove: 2.5
-  isPlaying: 1
-  levels:
+  _dog: {fileID: 1417249689}
+  _levels:
   - {fileID: 11400000, guid: 002b7f556ae4ee043835d08052249631, type: 2}
   - {fileID: 11400000, guid: e5c783ee61687fb43ae52b770d205f3d, type: 2}
   - {fileID: 11400000, guid: bb29adf172bcebd4f8f5606e67be2f20, type: 2}
@@ -896,14 +893,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e2acaeffd57269e41979e8cfe002712f, type: 2}
   - {fileID: 11400000, guid: 4001cfb557390184abb3416f23670030, type: 2}
   - {fileID: 11400000, guid: d17eb893dfef6ab4e817422c943d9713, type: 2}
-  vachePrefab: {fileID: 4896714030037061410, guid: 88e8e1e15fb8691478ac7c41ff9a61e7, type: 3}
-  animation: {fileID: 1991304552}
-  titleAnim: {fileID: 2075856858}
-  sign: {fileID: 1610907787}
-  NbVaches: {fileID: 1651457212}
-  mainCam: {fileID: 654869330}
-  gameOverCanvas: {fileID: 589287759}
-  objectiveText: {fileID: 526672014}
+  _vachePrefab: {fileID: 4896714030037061410, guid: 88e8e1e15fb8691478ac7c41ff9a61e7, type: 3}
+  Animation: {fileID: 1991304552}
+  TitleAnim: {fileID: 2075856858}
+  _sign: {fileID: 1610907787}
+  _nbVaches: {fileID: 1651457212}
+  _mainCam: {fileID: 654869330}
+  _gameOverCanvas: {fileID: 589287759}
+  _objectiveText: {fileID: 526672014}
 --- !u!4 &1481162040
 Transform:
   m_ObjectHideFlags: 0
@@ -6281,28 +6278,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4347389011291908631, guid: c4ba7f00ca21e6f4383334759c0c986a, type: 3}
-      propertyPath: m_Volume
-      value: 0.422
-      objectReference: {fileID: 0}
     - target: {fileID: 9069714005380370467, guid: c4ba7f00ca21e6f4383334759c0c986a, type: 3}
-      propertyPath: Title
-      value: 
-      objectReference: {fileID: 1266272981}
-    - target: {fileID: 9069714005380370467, guid: c4ba7f00ca21e6f4383334759c0c986a, type: 3}
-      propertyPath: speedDog
-      value: 7.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9069714005380370467, guid: c4ba7f00ca21e6f4383334759c0c986a, type: 3}
-      propertyPath: animation
+      propertyPath: Animation
       value: 
       objectReference: {fileID: 2075856858}
     - target: {fileID: 9069714005380370467, guid: c4ba7f00ca21e6f4383334759c0c986a, type: 3}
-      propertyPath: cameraShake
+      propertyPath: _cameraShake
       value: 
       objectReference: {fileID: 654869332}
     - target: {fileID: 9069714005380370467, guid: c4ba7f00ca21e6f4383334759c0c986a, type: 3}
-      propertyPath: particleSystem
+      propertyPath: _particleSystem
       value: 
       objectReference: {fileID: 1927463882}
     - target: {fileID: 9069714005380370468, guid: c4ba7f00ca21e6f4383334759c0c986a, type: 3}

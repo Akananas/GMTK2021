@@ -4,68 +4,64 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
-    public List<VacheScript> vaches;
-    public Dog dog;
-    public float nextMove;
-    private int currentLevel;
-    public static GameManager inst;
-    public bool isPlaying = true;
+    private List<CowScript> _vaches = new List<CowScript>();
     [SerializeField]
-    private List<LevelObject> levels;
-    private GameObject currentLoadedLevel;
-    public GameObject vachePrefab;
-    public Animator animation;
-    public Animator titleAnim;
-
-    public GameObject sign;
-    public TextMesh NbVaches;
-    private float NbScore = 0;
+    private DogScript _dog;
+    private int _currentLevel;
+    public static GameManager Instance;
+    public bool isPlaying { get; private set; } = true;
     [SerializeField]
-    private Camera mainCam;
+    private List<LevelObject> _levels;
+    private GameObject _currentLoadedLevel;
     [SerializeField]
-    private GameObject gameOverCanvas;
+    private GameObject _vachePrefab;
+    public Animator Animation;
+    public Animator TitleAnim;
     [SerializeField]
-    private GameObject objectiveText;
+    private GameObject _sign;
+    [SerializeField]
+    private TextMesh _nbVaches;
+    private float _nbScore = 0;
+    [SerializeField]
+    private Camera _mainCam;
+    [SerializeField]
+    private GameObject _gameOverCanvas;
+    [SerializeField]
+    private GameObject _objectiveText;
     void Awake(){
-        if (inst == null){
-
-            inst = this;
+        if (Instance == null){
+            Instance = this;
             DontDestroyOnLoad(this.gameObject);
-    
-            //Rest of your Awake code
-    
-        } else {
+        } 
+        else {
             Destroy(this);
         }
-        currentLevel = 0;
+        _currentLevel = 0;
         LoadNextLevel();
         StopGame();
     }
-    private void Update() {
-    }
-
     public void VacheOutOfBound(){
         StopGame();
     }
 
     public void CheckWinLevel(){
         bool won = true;
-        NbScore +=1; 
+        _nbScore +=1; 
         GameObject confetti = GameObject.FindGameObjectWithTag("Confetti");
         confetti.GetComponent<ParticleSystem>().Play();
         confetti.GetComponent<AudioSource>().Play();
-        NbVaches.text = NbScore.ToString() + "/" +vaches.Count;
-        foreach(VacheScript vache in vaches){
-            if(!vache.isDone){
+        _nbVaches.text = _nbScore.ToString() + "/" +_vaches.Count;
+        foreach(CowScript vache in _vaches){
+            if(!vache.IsDone){
                 won = false;
             }
         }
         if(won){
-            currentLevel++;
-            foreach(VacheScript vache in vaches){
-                vache.direction = Vector3.zero;
+            _currentLevel++;
+            foreach(CowScript vache in _vaches){
+                vache.Direction = Vector3.zero;
             }
-            if(currentLevel < levels.Count){
+            if(_currentLevel < _levels.Count){
                 StartCoroutine("Fade");
             }else{
                 StartCoroutine(EndCoroutine());
@@ -82,43 +78,43 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame(){
         RestartGame();
-        objectiveText.SetActive(true);
+        _objectiveText.SetActive(true);
     }
     private void LoadNextLevel(){
-        Destroy(currentLoadedLevel);
-        LevelObject newLevel = levels[currentLevel];
-        currentLoadedLevel = Instantiate(newLevel.level);
-        dog.transform.position = newLevel.DogSpawn;
-        if(vaches.Count > newLevel.nbrVaches){
-            for(int i = vaches.Count - 1; i >= newLevel.nbrVaches;i--){
-                Destroy(vaches[i].gameObject);
-                vaches.RemoveAt(i);
+        Destroy(_currentLoadedLevel);
+        LevelObject newLevel = _levels[_currentLevel];
+        _currentLoadedLevel = Instantiate(newLevel.level);
+        _dog.transform.position = newLevel.DogSpawn;
+        if(_vaches.Count > newLevel.nbrVaches){
+            for(int i = _vaches.Count - 1; i >= newLevel.nbrVaches;i--){
+                Destroy(_vaches[i].gameObject);
+                _vaches.RemoveAt(i);
             }
-        }else if (vaches.Count < newLevel.nbrVaches){
-            for(int i = vaches.Count; i < newLevel.nbrVaches; i++){
-                var go = Instantiate(vachePrefab,Vector3.zero, Quaternion.identity);
-                vaches.Add(go.GetComponent<VacheScript>());
+        }else if (_vaches.Count < newLevel.nbrVaches){
+            for(int i = _vaches.Count; i < newLevel.nbrVaches; i++){
+                var go = Instantiate(_vachePrefab,Vector3.zero, Quaternion.identity);
+                _vaches.Add(go.GetComponent<CowScript>());
             }
         }
-        for(int i = 0; i < vaches.Count; i++){
-            vaches[i].Reset(levels[currentLevel].VacheSpawn[i]);
+        for(int i = 0; i < _vaches.Count; i++){
+            _vaches[i].Reset(_levels[_currentLevel].VacheSpawn[i]);
         }
         PlaceSign(newLevel.signPos);
 
     }
 
     private void PlaceSign(Vector3 signPos){
-        sign.transform.position = signPos;
-        NbScore = 0;
-        NbVaches.text = NbScore.ToString() + "/" +vaches.Count;
+        _sign.transform.position = signPos;
+        _nbScore = 0;
+        _nbVaches.text = _nbScore.ToString() + "/" +_vaches.Count;
     }
     private IEnumerator Fade()
     {
         StopGame();
         yield return new WaitForSecondsRealtime(1.5f);
-        animation.SetBool("fade", true);
+        Animation.SetBool("fade", true);
         yield return new WaitForSecondsRealtime(1);
-        animation.SetBool("fade",false);
+        Animation.SetBool("fade",false);
         LoadNextLevel();
         RestartGame();
     }
@@ -126,10 +122,10 @@ public class GameManager : MonoBehaviour
     private IEnumerator EndCoroutine()
     {
         StopGame();
-        objectiveText.SetActive(false);
+        _objectiveText.SetActive(false);
         yield return new WaitForSecondsRealtime(1.5f);
-        animation.SetBool("fade", true);
+        Animation.SetBool("fade", true);
         yield return new WaitForSecondsRealtime(1);
-        gameOverCanvas.SetActive(true);
+        _gameOverCanvas.SetActive(true);
     }
 }

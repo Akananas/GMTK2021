@@ -146,10 +146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7c31ee68c7d1e45a19078a2b3cf4ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedDog: 10
-  rb: {fileID: 9069714005380370465}
-  targetDirection: {x: 0, y: 0}
-  particleSystem: {fileID: 0}
+  _speedDog: 7.5
+  _cameraShake: {fileID: 0}
+  _particleSystem: {fileID: 0}
+  Animation: {fileID: 0}
 --- !u!50 &9069714005380370465
 Rigidbody2D:
   serializedVersion: 4
@@ -209,7 +209,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 08cb743891537274bad1508d17a3932a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.422
   m_Pitch: 1
   Loop: 0
   Mute: 0
